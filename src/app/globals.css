@@ -1,74 +1,226 @@
 @import "tailwindcss";
 
+/* =============================================================================
+   Dark Color Scheme — VibeQuest
+   WCAG 2.1 AA compliant: ≥4.5:1 normal text, ≥3:1 large text / UI components
+   Contrast notes:
+     --foreground (#f1f5f9) on --background (#020617)  ≈ 18.5:1  ✓
+     --foreground (#f1f5f9) on --card (#1e293b)         ≈ 12.6:1  ✓
+     --foreground-secondary (#e2e8f0) on --card         ≈ 11.3:1  ✓
+     --muted-foreground (#94a3b8) on --background       ≈  7.0:1  ✓
+     --neon-indigo (#818cf8) on --background            ≈  6.1:1  ✓
+     --neon-indigo (#818cf8) on --card                  ≈  4.6:1  ✓ (normal text)
+     --neon-cyan (#22d3ee) on --background              ≈  8.2:1  ✓
+     --neon-cyan (#22d3ee) on --card                    ≈  6.2:1  ✓
+   ============================================================================= */
+
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
-  --primary: #6366f1; /* Indigo */
-  --secondary: #06b6d4; /* Cyan */
-  --accent: #f43f5e; /* Rose */
-  --muted: #1e1e1e;
-  --card: #0f0f0f;
-  --neon-indigo: 0 0 20px rgba(99, 102, 241, 0.5);
-  --neon-cyan: 0 0 20px rgba(6, 182, 212, 0.5);
+  /* Backgrounds */
+  --background: #020617;           /* slate-950 */
+  --background-secondary: #0f172a; /* slate-900 */
+
+  /* Card / surface */
+  --card: #1e293b;                 /* slate-800 */
+  --card-foreground: #f1f5f9;      /* slate-100 */
+  --card-elevated: #172033;        /* slate-850 (between slate-800 and slate-900) */
+
+  /* Sidebar */
+  --sidebar: #0f172a;              /* slate-900 */
+
+  /* Text */
+  --foreground: #f1f5f9;           /* slate-100 */
+  --foreground-secondary: #e2e8f0; /* slate-200 */
+  --muted: #1e293b;                /* slate-800 */
+  --muted-foreground: #94a3b8;     /* slate-400 */
+
+  /* Borders */
+  --border: #334155;               /* slate-700 */
+  --border-subtle: #1e293b;        /* slate-800 */
+
+  /* Neon accent — Indigo */
+  --neon-indigo: #818cf8;          /* indigo-400 */
+  --neon-indigo-500: #6366f1;      /* indigo-500 */
+
+  /* Neon accent — Cyan */
+  --neon-cyan: #22d3ee;            /* cyan-400 */
+  --neon-cyan-500: #06b6d4;        /* cyan-500 */
+
+  /* Legacy aliases kept for backward compatibility */
+  --primary: #818cf8;
+  --primary-light: #6366f1;
+  --secondary: #22d3ee;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --text-muted: #94a3b8;
 }
+
+/* =============================================================================
+   Tailwind v4 theme token mapping
+   ============================================================================= */
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-sidebar: var(--sidebar);
   --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
   --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-card: var(--card);
-  
-  --shadow-neon-indigo: var(--neon-indigo);
-  --shadow-neon-cyan: var(--neon-cyan);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-elevated: var(--card-elevated);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-neon-indigo: var(--neon-indigo);
+  --color-neon-indigo-500: var(--neon-indigo-500);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-cyan-500: var(--neon-cyan-500);
+  --color-text-muted: var(--text-muted);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* =============================================================================
+   Base reset
+   ============================================================================= */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* =============================================================================
+   Neon glow utility classes
+   Spread: 4–12px  |  Opacity: 20–30%  (Requirement 7.3)
+   Wrapped in @layer utilities for proper Tailwind v4 integration and
+   compatibility with responsive/state variants (hover:, focus:, etc.)
+   ============================================================================= */
+
+@layer utilities {
+  /* Indigo glow — resting state (spread 4-8px, 20-25% opacity) */
+  .neon-glow-indigo {
+    box-shadow:
+      0 0 4px rgba(99, 102, 241, 0.20),
+      0 0 8px rgba(99, 102, 241, 0.25);
+  }
+
+  /* Indigo glow — hover / active state (spread 8-12px, 25-30% opacity) */
+  .neon-glow-indigo-strong {
+    box-shadow:
+      0 0 8px rgba(99, 102, 241, 0.30),
+      0 0 12px rgba(99, 102, 241, 0.25),
+      0 0 24px rgba(99, 102, 241, 0.15);
+  }
+
+  /* Cyan glow — resting state (spread 4-8px, 20-25% opacity) */
+  .neon-glow-cyan {
+    box-shadow:
+      0 0 4px rgba(6, 182, 212, 0.20),
+      0 0 8px rgba(6, 182, 212, 0.25);
+  }
+
+  /* Cyan glow — hover / active state (spread 8-12px, 25-30% opacity) */
+  .neon-glow-cyan-strong {
+    box-shadow:
+      0 0 8px rgba(6, 182, 212, 0.30),
+      0 0 12px rgba(6, 182, 212, 0.25),
+      0 0 24px rgba(6, 182, 212, 0.15);
+  }
+
+  /* Combined indigo+cyan glow for special emphasis elements */
+  .neon-glow-dual {
+    box-shadow:
+      0 0 4px rgba(99, 102, 241, 0.20),
+      0 0 8px rgba(6, 182, 212, 0.20),
+      0 0 12px rgba(99, 102, 241, 0.15);
+  }
+
+  /* Focus glow — used for keyboard focus rings (Requirement 7.6, 10.7) */
+  .neon-glow-focus {
+    outline: 2px solid var(--neon-indigo);
+    outline-offset: 2px;
+    box-shadow:
+      0 0 4px rgba(99, 102, 241, 0.20),
+      0 0 12px rgba(99, 102, 241, 0.15);
+  }
+
+  /* Cyan variant focus glow */
+  .neon-glow-focus-cyan {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+    box-shadow:
+      0 0 4px rgba(6, 182, 212, 0.20),
+      0 0 12px rgba(6, 182, 212, 0.15);
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), sans-serif;
-  min-height: 100vh;
+/* =============================================================================
+   Component utility classes
+   ============================================================================= */
+
+@layer utilities {
+  /* Card styles */
+  .card-clean {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Sidebar active nav item */
+  .nav-active {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--neon-indigo);
+  }
+
+  /* Scrollbar utilities */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Disable transitions (opt-out) */
+  .no-transition {
+    transition: none !important;
+  }
 }
 
-/* Custom Utilities */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
+/* =============================================================================
+   Smooth transitions
+   Applied globally for hover/focus neon glow effects (150-250ms per Req 7.5)
+   ============================================================================= */
 
-.neon-border-indigo {
-  border: 1px solid var(--primary);
-  box-shadow: var(--neon-indigo);
-}
-
-.neon-border-cyan {
-  border: 1px solid var(--secondary);
-  box-shadow: var(--neon-cyan);
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@layer base {
+  * {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
 }

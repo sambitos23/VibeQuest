@@ -1,0 +1,79 @@
+
+> vibequest@0.1.0 test
+> vitest run src/__tests__/properties/persistence.property.test.ts
+
+
+ RUN  v3.2.4 /Users/sambitsaha/Downloads/PromtWars
+
+stderr | src/__tests__/properties/persistence.property.test.ts > Persistence and Hydration Property Tests > Property: hydration should restore state correctly from valid localStorage
+State loaded from storage couldn't be migrated since no migrate function was provided
+State loaded from storage couldn't be migrated since no migrate function was provided
+
+ ❯ src/__tests__/properties/persistence.property.test.ts (2 tests | 1 failed) 30ms
+   ✓ Persistence and Hydration Property Tests > Property: stored state should match in-memory state after acceptCard 25ms
+   × Persistence and Hydration Property Tests > Property: hydration should restore state correctly from valid localStorage 5ms
+     → Property failed after 1 tests
+{ seed: 477342032, path: "0:0", endOnFailure: true }
+Counterexample: [1]
+Shrunk 1 time(s)
+Got AssertionError: expected +0 to be 1 // Object.is equality
+    at /Users/sambitsaha/Downloads/PromtWars/src/__tests__/properties/persistence.property.test.ts:67:43
+    at Property.predicate (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/property/Property.js:14:54)
+    at Property.run (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/property/Property.generic.js:46:33)
+    at runIt (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/runner/Runner.js:18:30)
+    at check (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/runner/Runner.js:62:11)
+    at Proxy.assert (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/runner/Runner.js:65:17)
+    at /Users/sambitsaha/Downloads/PromtWars/src/__tests__/properties/persistence.property.test.ts:33:8
+    at file:///Users/sambitsaha/Downloads/PromtWars/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///Users/sambitsaha/Downloads/PromtWars/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///Users/sambitsaha/Downloads/PromtWars/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/properties/persistence.property.test.ts > Persistence and Hydration Property Tests > Property: hydration should restore state correctly from valid localStorage
+Error: Property failed after 1 tests
+{ seed: 477342032, path: "0:0", endOnFailure: true }
+Counterexample: [1]
+Shrunk 1 time(s)
+Got AssertionError: expected +0 to be 1 // Object.is equality
+    at /Users/sambitsaha/Downloads/PromtWars/src/__tests__/properties/persistence.property.test.ts:67:43
+    at Property.predicate (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/property/Property.js:14:54)
+    at Property.run (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/property/Property.generic.js:46:33)
+    at runIt (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/runner/Runner.js:18:30)
+    at check (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/runner/Runner.js:62:11)
+    at Proxy.assert (file:///Users/sambitsaha/Downloads/PromtWars/node_modules/fast-check/lib/esm/check/runner/Runner.js:65:17)
+    at /Users/sambitsaha/Downloads/PromtWars/src/__tests__/properties/persistence.property.test.ts:33:8
+    at file:///Users/sambitsaha/Downloads/PromtWars/node_modules/@vitest/runner/dist/chunk-hooks.js:155:11
+    at file:///Users/sambitsaha/Downloads/PromtWars/node_modules/@vitest/runner/dist/chunk-hooks.js:752:26
+    at file:///Users/sambitsaha/Downloads/PromtWars/node_modules/@vitest/runner/dist/chunk-hooks.js:1897:20
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+ ❯ src/__tests__/properties/persistence.property.test.ts:67:43
+     65|         
+     66|         const state = usePlannerStore.getState();
+     67|         expect(state.roadmapItems.length).toBe(numItems);
+       |                                           ^
+     68|         expect(state.nature).toBe('intense');
+     69|       })
+ ❯ Property.predicate node_modules/fast-check/lib/esm/check/property/Property.js:14:54
+ ❯ Property.run node_modules/fast-check/lib/esm/check/property/Property.generic.js:46:33
+ ❯ runIt node_modules/fast-check/lib/esm/check/runner/Runner.js:18:30
+ ❯ check node_modules/fast-check/lib/esm/check/runner/Runner.js:62:11
+ ❯ Proxy.assert node_modules/fast-check/lib/esm/check/runner/Runner.js:65:17
+ ❯ src/__tests__/properties/persistence.property.test.ts:33:8
+ ❯ buildError node_modules/fast-check/lib/esm/check/runner/utils/RunDetailsFormatter.js:126:15
+ ❯ throwIfFailed node_modules/fast-check/lib/esm/check/runner/utils/RunDetailsFormatter.js:138:11
+ ❯ reportRunDetails node_modules/fast-check/lib/esm/check/runner/utils/RunDetailsFormatter.js:151:16
+ ❯ Proxy.assert node_modules/fast-check/lib/esm/check/runner/Runner.js:69:9
+ ❯ src/__tests__/properties/persistence.property.test.ts:33:8
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  14:09:42
+   Duration  1.03s (transform 50ms, setup 52ms, collect 90ms, tests 30ms, environment 380ms, prepare 59ms)
+

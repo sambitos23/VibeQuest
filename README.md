@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VibeQuest: Modern Travel Explorer
+
+A visual-first travel planning platform built for the modern explorer. Redesigned with a focus on clean aesthetics, teal/emerald palettes, and seamless discovery.
 
 ## Getting Started
 

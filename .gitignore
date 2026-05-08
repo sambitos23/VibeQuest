@@ -3,7 +3,9 @@ node_modules/
 .pnp
 .pnp.js
 .yarn/
-package-lock.json
+
+# Internal
+.kiro/
 
 # Testing
 coverage/
